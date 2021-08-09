@@ -8,7 +8,7 @@ The repository contains two datasets used for the experiments ([UKP Corpus](http
 3. To provide classification with the pre-trained *disBERT* run the classification procedure with the command *python bert_discourse-classification.py*
 4. Use global.config file to set the necessary parameters
 
-The pre-trained wights for the model on the UKP corpus are stored in AR dataset are stored in https://drive.google.com/file/d/1VA7d9n3E7kBww0Iqm0TeeCcK87KoINGF/view?usp=sharing
+The pre-trained wights for the model on the UKP corpus are stored in https://drive.google.com/file/d/1YTI7dmnD4W082a_pNuzniKbcTQDBJLOj/view?usp=sharing; AR dataset are stored in https://drive.google.com/file/d/1VA7d9n3E7kBww0Iqm0TeeCcK87KoINGF/view?usp=sharing
 
 Two [ipython notebooks](https://github.com/lizagonch/Discourse-BERT/tree/master/data_pre-processing) show the data-preprocessing procedure and DDG construction.
 
