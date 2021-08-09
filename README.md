@@ -12,4 +12,7 @@ The pre-trained wights for the model on the UKP corpus are stored in https://dri
 
 Two [ipython notebooks](https://github.com/lizagonch/Discourse-BERT/tree/master/data_pre-processing) show the data-preprocessing procedure and DDG construction.
 
+* [The link to the AR parsed data](https://drive.google.com/drive/folders/1aWv05w4_dq_W5Ie4Ciujl8y_SRp1zrxt?usp=sharing)
+* [The link to the UKP parsed data](https://drive.google.com/drive/folders/1Kvi0DY6yBwlwBwzhqlDs-HYttSeqOeK1?usp=sharing)
+
 The retraining of the segment layer is based on implementation of the C-BERT introduced in https://github.com/1024er/cbert_aug
