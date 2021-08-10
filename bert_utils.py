@@ -52,6 +52,10 @@ class DataProcessor(object):
     def get_dev_examples(self, data_dir):
         """Gets a collection of 'InputExample's for the dev set."""
         raise NotImplementedError()
+        
+    def get_test_examples(self, data_dir):
+        """Gets a collection of 'InputExample's for the dev set."""
+        raise NotImplementedError()
 
     def get_labels(self):
         """Gets the list of labels for this data set."""
@@ -80,6 +84,11 @@ class AugProcessor(DataProcessor):
         """See base class."""
         return self._create_examples(
             self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")  # dev
+      
+    def get_test_examples(self, data_dir):
+        """See base class."""
+        return self._create_examples(
+            self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")  # test
 
     def get_labels(self, name):
         """It is the list that consists of all of the possible discourse labels"""
