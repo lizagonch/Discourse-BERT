@@ -96,6 +96,8 @@ def main():
                         help="temperature")
     parser.add_argument('--istrain', default=False, type=bool,
                         help="train or dev datasets")
+    parser.add_argument('--istest', default=False, type=bool,
+                        help="train or dev datasets")
 
     args = parser.parse_args()
     with open("global.config", 'r') as f:
@@ -160,6 +162,8 @@ def main():
     ## prepare for training
     if (args.istrain):
         train_examples = processor.get_train_examples(args.data_dir)
+    elif (args.istest):
+        train_examples = processor.get_test_examples(args.data_dir)
     else:
         train_examples = processor.get_dev_examples(args.data_dir)
     train_features, num_train_steps, train_dataloader = \
