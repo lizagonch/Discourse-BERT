@@ -1,5 +1,5 @@
 # Discourse-BERT
-This is a repository for *disBERT* model (a traditional BERT-[base]} model with discourse extension) implementation.
+This is a repository for *disBERT* model (a traditional BERT-[base] model with discourse extension) implementation.
 
 The repository contains two datasets used for the experiments ([UKP Corpus](https://github.com/lizagonch/Discourse-BERT/tree/master/datasets/discourse) and [Amazon Review dataset](https://github.com/lizagonch/Discourse-BERT/tree/master/datasets/amazon), these are already augmented datasets).
 
