@@ -61,11 +61,11 @@ def main():
     ## required parameters
     parser.add_argument("--data_dir", default="datasets", type=str,
                         help="The input data dir. Should contain the .tsv files (or other data files) for the task.")
-    parser.add_argument("--save_model_dir", default="cbert_pretrained", type=str,
+    parser.add_argument("--save_model_dir", default="cbert_model", type=str,
                         help="The cache dir for saved model.")
     parser.add_argument("--bert_model", default="bert-base-uncased", type=str,
                         help="The path of pretrained bert model.")
-    parser.add_argument("--task_name", default="subj", type=str,
+    parser.add_argument("--task_name", default="discourse", type=str,
                         help="The path of the classification results.")
     parser.add_argument("--output_dir", default="classification_results", type=str,
                         help="The name of the task to train.")
@@ -96,7 +96,7 @@ def main():
                         help="temperature")
     parser.add_argument('--istrain', default=False, type=bool,
                         help="train or dev datasets")
-    parser.add_argument('--istest', default=False, type=bool,
+    parser.add_argument('--istest', default=True, type=bool,
                         help="train or dev datasets")
 
     args = parser.parse_args()
@@ -116,6 +116,7 @@ def main():
     task_name = args.task_name
     if task_name not in processors:
         raise ValueError("Task not found: %s" % (task_name))
+    task_name = 'discourse'
     processor = processors[task_name]
     label_list = processor.get_labels(task_name)
 
@@ -158,13 +159,18 @@ def main():
     if os.path.exists(args.output_dir):
         shutil.rmtree(args.output_dir)
     #shutil.copytree("aug_data/{}".format(task_name), args.output_dir)
-
+    
+    a = 1
+    print("This is ", a)
     ## prepare for training
-    if (args.istrain):
+    if (a == 0):#args.istrain):
+        print('TRAIN')
         train_examples = processor.get_train_examples(args.data_dir)
-    elif (args.istest):
+    elif (a == 1):#args.istest):
+        print('TEST')
         train_examples = processor.get_test_examples(args.data_dir)
     else:
+        print('DEV')
         train_examples = processor.get_dev_examples(args.data_dir)
     train_features, num_train_steps, train_dataloader = \
         bert_utils.construct_train_dataloader(train_examples, label_list, args.max_seq_length,
@@ -185,7 +191,7 @@ def main():
 
     #origin_train_path = os.path.join(args.output_dir, "train_origin.tsv")
     #save_train_path = os.path.join(args.output_dir, "train.tsv")
-    train_examples = processor.get_train_examples(args.data_dir)
+    #train_examples = processor.get_train_examples(args.data_dir)
     train_features, num_train_steps, train_dataloader = bert_utils.construct_train_dataloader(train_examples, label_list,
                                                                                               args.max_seq_length,
                                                                                               args.train_batch_size,
@@ -221,6 +227,11 @@ def main():
             precision_list.append(precision(logits.detach().cpu().numpy(), class_span.detach().cpu().numpy()))
             recall_list.append(recall(logits.detach().cpu().numpy(), class_span.detach().cpu().numpy()))
             f1_list.append(f1(logits.detach().cpu().numpy(), class_span.detach().cpu().numpy()))
+            
+            #print(precision_list[len(precision_list)-1])
+            #print(recall_list[len(recall_list)-1])
+            #print(f1_list[len(f1_list)-1])
+            
             output_examples.append(OutputObject(segment=segment_span.detach().cpu().numpy(),
                                                 predicted_class=np.argmax(logits.detach().cpu().numpy(), axis=1).flatten(),
                                                 cl=class_span.detach().cpu().numpy()))
